@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base64 Tool</title>
+  <meta name="description" content="Base64 encoder/decoder with UTF-8, URL-safe variant, and file-to-data-URL conversion." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">&#x1F4E6;</span>
+        <div>
+          <h1 data-i18n="title">Base64 Tool</h1>
+          <p class="subtitle" data-i18n="subtitle">Encode / Decode</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-theme" class="icon-btn" data-i18n-title="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+        <button id="btn-lang" class="icon-btn">JA</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Mode selector -->
+    <div class="toolbar" role="toolbar" aria-label="Mode">
+      <div class="btn-group">
+        <button id="mode-text" class="tab-btn active" data-i18n="modeText">Text</button>
+        <button id="mode-file" class="tab-btn" data-i18n="modeFile">File</button>
+      </div>
+    </div>
+
+    <!-- Options row -->
+    <div class="options-row">
+      <div class="btn-group direction-group">
+        <button id="btn-encode" class="dir-btn active" data-i18n="encode">Encode</button>
+        <button id="btn-decode" class="dir-btn" data-i18n="decode">Decode</button>
+        <button id="btn-auto" class="dir-btn auto-btn" data-i18n="autoDetect">Auto-detect</button>
+      </div>
+      <label class="checkbox-label">
+        <input type="checkbox" id="opt-url-safe" />
+        <span data-i18n="urlSafe">URL-safe (RFC 4648)</span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="opt-wrap" />
+        <span data-i18n="lineWrap">Line wrap (76 chars)</span>
+      </label>
+    </div>
+
+    <!-- Auto-detect indicator -->
+    <div id="auto-indicator" class="auto-indicator hidden" aria-live="polite"></div>
+
+    <!-- Text panel: two textareas side by side -->
+    <div id="text-panel" class="io-panel">
+      <div class="io-col">
+        <label class="io-label" for="input-area" data-i18n="inputLabel">Input</label>
+        <textarea
+          id="input-area"
+          class="io-textarea"
+          spellcheck="false"
+          autocorrect="off"
+          autocapitalize="off"
+          placeholder="Type or paste here…"
+        ></textarea>
+      </div>
+      <div class="io-sep">
+        <button id="btn-swap" class="swap-btn" data-i18n="swap" title="Swap input/output">&#x21D5; Swap</button>
+      </div>
+      <div class="io-col">
+        <label class="io-label" for="text-output" data-i18n="outputLabel">Output</label>
+        <textarea
+          id="text-output"
+          class="io-textarea"
+          spellcheck="false"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- File panel: drop zone + output below -->
+    <div id="file-panel" class="hidden">
+      <div
+        id="drop-zone"
+        class="drop-zone"
+        role="button"
+        tabindex="0"
+        aria-label="File drop zone"
+      >
+        <span class="drop-icon" aria-hidden="true">&#x1F4C4;</span>
+        <span data-i18n="dropZone">Drop a file here, or click to select</span>
+      </div>
+      <input type="file" id="file-input" class="hidden" aria-hidden="true" />
+      <p id="file-info" class="file-info"></p>
+      <div class="io-col" style="margin-top: 1rem;">
+        <label class="io-label" for="file-output" data-i18n="outputLabel">Output</label>
+        <textarea
+          id="file-output"
+          class="io-textarea"
+          spellcheck="false"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-row">
+      <button id="btn-copy" class="action-btn" data-i18n="copy">Copy</button>
+      <button id="btn-download" class="action-btn" data-i18n="download">Download</button>
+      <button id="btn-clear" class="action-btn secondary" data-i18n="clear">Clear</button>
+    </div>
+
+    <!-- Status message -->
+    <div id="status-msg" class="status-msg" aria-live="polite"></div>
+
+    <!-- Size comparison -->
+    <div id="size-panel" class="size-panel hidden">
+      <h3 data-i18n="sizeLabel">Size comparison</h3>
+      <div class="size-grid">
+        <div class="size-item">
+          <span class="size-key" data-i18n="originalSize">Original size</span>
+          <span id="size-original" class="size-val">—</span>
+        </div>
+        <div class="size-item">
+          <span class="size-key" data-i18n="encodedSize">Base64 size</span>
+          <span id="size-encoded" class="size-val">—</span>
+        </div>
+        <div class="size-item">
+          <span class="size-key" data-i18n="overhead">Overhead</span>
+          <span id="size-overhead" class="size-val overhead">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image preview -->
+    <div id="image-preview" class="image-preview hidden">
+      <h3 data-i18n="previewLabel">Image preview</h3>
+      <img id="preview-img" src="" alt="Preview" />
+    </div>
+  </main>
+
+  <footer>
+    <p>Base64 Tool — <a href="https://github.com/masaru87/base64-tool" target="_blank" rel="noopener">GitHub</a> · Built by <a href="https://sen.ltd" target="_blank" rel="noopener">SEN LLC</a></p>
+  </footer>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
