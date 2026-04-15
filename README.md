@@ -51,3 +51,10 @@ npm test
 ## License
 
 MIT © 2026 SEN LLC (SEN 合同会社)
+
+<!-- sen-publish:links -->
+## Links
+
+- 🌐 Demo: https://sen.ltd/portfolio/base64-tool/
+- 📝 dev.to: https://dev.to/sendotltd/writing-base64-from-scratch-in-javascript-why-atob-isnt-enough-4d85
+<!-- /sen-publish:links -->
